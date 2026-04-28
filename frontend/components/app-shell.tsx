@@ -10,6 +10,7 @@ const links = [
   { href: '/tasks', label: 'Tasks' },
   { href: '/resources', label: 'Resources' },
   { href: '/timesheets', label: 'Timesheets' },
+  { href: '/financials', label: 'Financials' },
 ];
 
 export default function AppShell({ children }: { children: ReactNode }) {

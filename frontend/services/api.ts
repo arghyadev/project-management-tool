@@ -36,6 +36,7 @@ api.interceptors.response.use(
 export type LoginPayload = { email: string; password: string };
 export type SyncTimesheetPayload = { from_date: string; to_date: string; source?: 'keka' | 'manual' };
 export type ProjectMemberPayload = { user_id: number; allocation_pct: number; billable: boolean };
+export type SyncFinancialPayload = { external_project_code: string };
 
 export async function login(payload: LoginPayload) {
   const { data } = await api.post('/auth/login', payload);
@@ -69,5 +70,15 @@ export async function fetchTimesheets() {
 
 export async function syncTimesheets(payload: SyncTimesheetPayload) {
   const { data } = await api.post('/timesheets/sync', payload);
+  return data;
+}
+
+export async function fetchFinancials(projectId: number) {
+  const { data } = await api.get(`/projects/${projectId}/financials`);
+  return data;
+}
+
+export async function syncFinancials(projectId: number, payload: SyncFinancialPayload) {
+  const { data } = await api.post(`/projects/${projectId}/financials/sync`, payload);
   return data;
 }

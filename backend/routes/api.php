@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\TaskController;
 use App\Http\Controllers\Api\V1\IntegrationController;
 use App\Http\Controllers\Api\V1\TimesheetController;
 use App\Http\Controllers\Api\V1\ResourceAllocationController;
+use App\Http\Controllers\Api\V1\FinancialController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
@@ -28,5 +29,8 @@ Route::prefix('v1')->group(function (): void {
 
         Route::get('/timesheets', [TimesheetController::class, 'index']);
         Route::post('/timesheets/sync', [TimesheetController::class, 'sync']);
+
+        Route::get('/projects/{project}/financials', [FinancialController::class, 'index']);
+        Route::post('/projects/{project}/financials/sync', [FinancialController::class, 'sync']);
     });
 });

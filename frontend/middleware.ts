@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('pmo_token')?.value;
-  const isProtected = ['/dashboard', '/projects', '/tasks', '/resources', '/timesheets']
+  const isProtected = ['/dashboard', '/projects', '/tasks', '/resources', '/timesheets', '/financials']
     .some((route) => request.nextUrl.pathname.startsWith(route));
 
   if (isProtected && !token) {
@@ -14,5 +14,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/projects/:path*', '/tasks/:path*', '/resources/:path*', '/timesheets/:path*'],
+  matcher: ['/dashboard/:path*', '/projects/:path*', '/tasks/:path*', '/resources/:path*', '/timesheets/:path*', '/financials/:path*'],
 };
