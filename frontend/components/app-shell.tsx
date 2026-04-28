@@ -8,6 +8,8 @@ const links = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/projects', label: 'Projects' },
   { href: '/tasks', label: 'Tasks' },
+  { href: '/resources', label: 'Resources' },
+  { href: '/timesheets', label: 'Timesheets' },
 ];
 
 export default function AppShell({ children }: { children: ReactNode }) {
@@ -18,7 +20,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <header className="border-b bg-white px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <h1 className="font-semibold">PMO Workspace</h1>
-          <nav className="flex gap-3 text-sm">
+          <nav className="flex flex-wrap gap-3 text-sm">
             {links.map((link) => (
               <Link
                 key={link.href}
