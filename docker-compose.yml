@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  api:
+    image: php:8.3-fpm
+    working_dir: /var/www/html
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - postgres
+      - redis
+
+  web:
+    image: nginx:alpine
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - api
+
+  frontend:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - '3000:3000'
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: pmo
+      POSTGRES_USER: pmo
+      POSTGRES_PASSWORD: pmo
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
