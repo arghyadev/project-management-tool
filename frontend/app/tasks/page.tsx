@@ -10,7 +10,7 @@ export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetchProjectTasks(1).then((response) => setTasks(response.data ?? []));
+    fetchProjectTasks(1).then((response) => setTasks(response.data.tasks ?? []));
   }, []);
 
   return (

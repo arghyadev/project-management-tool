@@ -9,7 +9,7 @@ export default function ProjectList() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetchProjects().then((response) => setProjects(response.data ?? []));
+    fetchProjects().then((response) => setProjects(response.data.projects ?? []));
   }, []);
 
   return (
