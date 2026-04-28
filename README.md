@@ -64,3 +64,8 @@ Monorepo structure for an enterprise PMO platform using Laravel 11 (backend API)
 - Backend follows Controller → Service → Repository pattern.
 - Frontend uses Next.js App Router with an API service layer.
 - Redis is used for async jobs/queues.
+
+
+## Step-by-Step Delivery
+- Follow `docs/implementation-roadmap.md` to roll out Phases 1-6 incrementally.
+- Each phase includes backend APIs, frontend UI, DB migrations, and integration checkpoints.

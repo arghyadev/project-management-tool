@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\ProjectController;
 use App\Http\Controllers\Api\V1\TaskController;
+use App\Http\Controllers\Api\V1\IntegrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
@@ -15,5 +16,9 @@ Route::prefix('v1')->group(function (): void {
         Route::apiResource('projects', ProjectController::class);
         Route::get('/projects/{project}/tasks', [TaskController::class, 'index']);
         Route::post('/projects/{project}/tasks', [TaskController::class, 'store']);
+
+        Route::post('/integrations/keka/sync', [IntegrationController::class, 'syncKeka']);
+        Route::post('/integrations/crm/sync', [IntegrationController::class, 'syncCrm']);
+        Route::post('/integrations/calendar/webhook', [IntegrationController::class, 'calendarWebhook']);
     });
 });

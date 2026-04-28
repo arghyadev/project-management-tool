@@ -9,6 +9,30 @@ export const api = axios.create({
   },
 });
 
+api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const storage = localStorage.getItem('pmo-auth-store');
+    const parsed = storage ? JSON.parse(storage) : null;
+    const token = parsed?.state?.token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (typeof window !== 'undefined' && [401, 419].includes(error?.response?.status)) {
+      localStorage.removeItem('pmo-auth-store');
+      document.cookie = 'pmo_token=; Max-Age=0; path=/';
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  },
+);
+
 export type LoginPayload = { email: string; password: string };
 
 export async function login(payload: LoginPayload) {

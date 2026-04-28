@@ -14,7 +14,11 @@ export default function LoginPage() {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const response = await login({ email, password });
-    setAuth(response.data.token, response.data.roles ?? []);
+    const token = response.data.token as string;
+    const roles = (response.data.roles ?? []) as string[];
+
+    setAuth(token, roles);
+    document.cookie = `pmo_token=${token}; path=/; max-age=86400`;
     router.push('/dashboard');
   };
 
